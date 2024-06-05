@@ -1,0 +1,580 @@
+
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Mans maršruts no dzīvesvietas līdz LU</title>
+        <link rel="stylesheet" href="css/styles.css">
+        <link rel="stylesheet" href="https://unpkg.com/leaflet/dist/leaflet.css" />
+        <script src="js/jquery.js"></script>
+        <script src="js/script.js"></script>
+    </head>
+    <body>
+    <div class="root">
+        <div class="content-wrapper">
+            <div class="header width-full">
+                <div class="header-content flex space-between items-center">
+                    <div class="logo flex-col space-around items-center">
+                        <img src="img/logo.svg" alt="" height="50" width="50">
+                    </div>
+                    <div class="header-items flex display-none">
+                        <div class="item">
+                            <a href="#towers">Zunda torņi</a>
+                        </div>
+                        <div class="item">
+                            <a href="#bank">Swedbank birojs</a>
+                        </div>
+                        <div class="item">
+                            <a href="#bridge">Vanšu tilts</a>
+                        </div>
+                        <div class="item">
+                            <a href="#castle">Rīgas pils</a>
+                        </div>
+                        <div class="item">
+                            <a href="#museum">Mākslas muzejs</a>
+                        </div>
+                        <div class="item">
+                            <a href="#church">Kristu katedrāle</a>
+                        </div>
+                        <div class="item">
+                            <a href="#monument">Brīvības piemineklis</a>
+                        </div>
+                    </div>
+                      <div class="checkbox-wrapper-3 flex items-center" style="margin-left: auto;">
+                        <img src="img/sun.svg" alt="" height="25" width="25" style="margin-right: 5px;">
+                        <input type="checkbox" id="cbx-3" />
+                        <label for="cbx-3" class="toggle"><span></span></label>
+                        <img src="img/moon.svg" alt="" height="20" width="20">
+                      </div>
+                      
+                      <style>
+                        .checkbox-wrapper-3 input[type="checkbox"] {
+                          visibility: hidden;
+                          display: none;
+                        }
+                      
+                        .checkbox-wrapper-3 .toggle {
+                          position: relative;
+                          display: block;
+                          width: 40px;
+                          height: 20px;
+                          cursor: pointer;
+                          -webkit-tap-highlight-color: transparent;
+                          transform: translate3d(0, 0, 0);
+                        }
+                        .checkbox-wrapper-3 .toggle:before {
+                          content: "";
+                          position: relative;
+                          top: 3px;
+                          left: 3px;
+                          width: 34px;
+                          height: 14px;
+                          display: block;
+                          background: #9A9999;
+                          border-radius: 8px;
+                          transition: background 0.2s ease;
+                        }
+                        .checkbox-wrapper-3 .toggle span {
+                          position: absolute;
+                          top: 0;
+                          left: 0;
+                          width: 20px;
+                          height: 20px;
+                          display: block;
+                          background: white;
+                          border-radius: 10px;
+                          box-shadow: 0 3px 8px rgba(154, 153, 153, 0.5);
+                          transition: all 0.2s ease;
+                        }
+                        .checkbox-wrapper-3 .toggle span:before {
+                          content: "";
+                          position: absolute;
+                          display: block;
+                          margin: -18px;
+                          width: 56px;
+                          height: 56px;
+                          background: rgba(36, 108, 216, 0.5);
+                          border-radius: 50%;
+                          transform: scale(0);
+                          opacity: 1;
+                          pointer-events: none;
+                        }
+                      
+                        .checkbox-wrapper-3 #cbx-3:checked + .toggle:before {
+                          background: #7aa4da;
+                        }
+                        .checkbox-wrapper-3 #cbx-3:checked + .toggle span {
+                          background: #112635;
+                          transform: translateX(20px);
+                          transition: all 0.2s cubic-bezier(0.8, 0.4, 0.3, 1.25), background 0.15s ease;
+                          box-shadow: 0 3px 8px rgba(79, 46, 220, 0.2);
+                        }
+                        .checkbox-wrapper-3 #cbx-3:checked + .toggle span:before {
+                          transform: scale(1);
+                          opacity: 0;
+                          transition: all 0.4s ease;
+                        }
+                      </style>
+                      
+                    <div class="burger-menu flex-col">
+                        <div></div>
+                        <div></div>
+                        <div></div>
+                    </div>
+                    <div class="menu-popup display-none">
+                        <div class="button-wrapper flex">
+                            <div class="close-menu flex-col space-around items-center">
+                                <img src="img/exit-arrow.svg" alt="">
+                            </div>
+                        </div>
+                        <div class="wrapper flex-col">
+                            <div class="menu-item">
+                                <div class="item">
+                                    <a href="">Zunda torņi</a>
+                                </div>
+                            </div>
+                            <div class="menu-item">
+                                <div class="item">
+                                    <a href="">Swedbank birojs</a>
+                                </div>
+                            </div>
+                            <div class="menu-item">
+                                <div class="item">
+                                    <a href="">Vanšu tilts</a>
+                                </div>
+                            </div>
+                            <div class="menu-item">
+                                <div class="item">
+                                    <a href="">Rīgas pils</a>
+                                </div>
+                            </div>
+                            <div class="menu-item">
+                                <div class="item">
+                                    <a href="">Latvijas Nacionālais mākslas muzejs</a>
+                                </div>
+                            </div>
+                            <div class="menu-item">
+                                <div class="item">
+                                    <a href="">Rīgas Kristu Piedzimšanas pareizticīgo katedrāle</a>
+                                </div>
+                            </div>
+                            <div class="menu-item">
+                                <div class="item">
+                                    <a href="">Brīvības piemineklis</a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="subheader width-full flex space-around items-center">
+                <div class="title">
+                    <h1>Transporta veids: 53. Autobuss</h1>
+                </div>
+            </div>
+            <div class="main-content">
+                <div class="to-up display-none">
+                    <div class="wrapper flex-col space-around items-center">
+                        <div class="arrow">
+                            &#10132;
+                        </div>
+                    </div>
+                </div>
+                <script src="https://unpkg.com/leaflet/dist/leaflet.js"></script>
+                <div class="map-section">
+                    <div class="map-content-wrapper flex-col space-around">
+
+                        <div class="content">
+                            <div class="title flex space-around">
+                                <h1 class="hero-title color-white">Mans maršruts no dzīvesvietas līdz Latvijas Universitāti</h1>
+                            </div>
+                            <div class="button-wrapper flex space-around mt-2">
+                                <button class="open-map">
+                                    Atvērt karti
+                                </button>
+                            </div>
+                            <div class="map-container mt-2 display-none">
+                                <div class="map display-none" id="map">
+
+                                </div>
+                            </div>
+                            <script>
+                                $(document).ready(function() {
+                                    $(".open-map").click(function() {
+
+                                        $('#map').fadeIn();
+                                        $('.map-container').fadeIn();
+
+                                        var map = L.map('map', {
+                                            center: [56.949489, 24.095885],
+                                            zoom: 13,
+                                            minZoom: 12,  // Minimum zoom level
+                                            maxZoom: 15,   // Maximum zoom level
+                                            dragging: false,       // Disable dragging
+                                            zoomControl: false,    // Disable zoom control
+                                            scrollWheelZoom: false,// Disable scroll wheel zoom
+                                            doubleClickZoom: true,// Disable double click zoom
+                                            boxZoom: false,        // Disable box zoom
+                                            touchZoom: false       // Disable touch zoom
+                                        });
+
+                                        var apiKey='7e229441-5fff-4b9e-959b-374d3040a9fc';
+
+                                        // L.tileLayer('https://tiles.stadiamaps.com/tiles/alidade_smooth_dark/{z}/{x}/{y}{r}.{ext}?api_key=' + apiKey, {
+                                        //     maxZoom: 20,
+                                        //     ext: 'png',
+                                        //     attribution: '&copy; <a href="https://stadiamaps.com/">Stadia Maps</a> contributors'
+                                        // }).addTo(map);
+
+                                        L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+                                            maxZoom: 19
+                                        }).addTo(map);
+
+
+                                        // Add a marker
+                                        var marker = L.marker([56.935537, 24.044716]).addTo(map)
+                                            .bindPopup('Start Point')
+                                            .openPopup();
+
+                                        var towersIcon = L.icon({
+                                            iconUrl: 'img/location-pin.svg',
+                                            iconSize: [38, 95],
+                                            iconAnchor: [18, 68],
+                                            popupAnchor: [-3, -76],
+                                            className: "towers-map-icon"
+                                        });
+
+                                        var bankIcon = L.icon({
+                                            iconUrl: 'img/location-pin.svg',
+                                            iconSize: [38, 95],
+                                            iconAnchor: [18, 68],
+                                            popupAnchor: [-3, -76],
+                                            className: "bank-map-icon"
+                                        });
+
+                                        var bridgeIcon = L.icon({
+                                            iconUrl: 'img/location-pin.svg',
+                                            iconSize: [38, 95],
+                                            iconAnchor: [18, 68],
+                                            popupAnchor: [-3, -76],
+                                            className: "bridge-map-icon"
+                                        });
+
+                                        var castleIcon = L.icon({
+                                            iconUrl: 'img/location-pin.svg',
+                                            iconSize: [38, 95],
+                                            iconAnchor: [18, 68],
+                                            popupAnchor: [-3, -76],
+                                            className: "castle-map-icon"
+                                        });
+
+                                        var museumIcon = L.icon({
+                                            iconUrl: 'img/location-pin.svg',
+                                            iconSize: [38, 95],
+                                            iconAnchor: [18, 68],
+                                            popupAnchor: [-3, -76],
+                                            className: "museum-map-icon"
+                                        });
+
+                                        var churchIcon = L.icon({
+                                            iconUrl: 'img/location-pin.svg',
+                                            iconSize: [38, 95],
+                                            iconAnchor: [18, 68],
+                                            popupAnchor: [-3, -76],
+                                            className: "church-map-icon"
+                                        });
+
+                                        var monumentIcon = L.icon({
+                                            iconUrl: 'img/location-pin.svg',
+                                            iconSize: [38, 95],
+                                            iconAnchor: [18, 68],
+                                            popupAnchor: [-3, -76],
+                                            className: "monument-map-icon"
+                                        });
+
+                                        var finish = L.icon({
+                                            iconUrl: 'img/finish.svg',
+                                            iconSize: [38, 25],
+                                            iconAnchor: [0, 0],
+                                            popupAnchor: [-3, -76],
+                                            className: "finish-map-icon"
+                                        });
+
+                                        L.marker([56.947203, 24.080843], {icon: towersIcon}).addTo(map);
+                                        L.marker([56.94900671708802, 24.08958884051688], {icon: bankIcon}).addTo(map);
+                                        L.marker([56.95113568347543, 24.095312214656055], {icon: bridgeIcon}).addTo(map);
+                                        L.marker([56.95105962022097, 24.100590802002237], {icon: castleIcon}).addTo(map);
+                                        L.marker([56.95589225487982, 24.113207913107104], {icon: museumIcon}).addTo(map);
+                                        L.marker([56.953821202486004, 24.115568257126412], {icon: churchIcon}).addTo(map);
+                                        L.marker([56.951536155090096, 24.113469986220785], {icon: monumentIcon}).addTo(map);
+
+                                        L.marker([56.95060639511978, 24.11575313772497], {icon: finish}).addTo(map);
+
+                                        // Highlight a road using a Polyline
+                                        var roadCoordinates = [
+                                            [56.9560, 24.1111],
+                                            [56.9468, 24.1049]
+                                        ];
+
+                                        $(".towers-map-icon").click(function() {
+                                            $('html, body').animate({
+                                                scrollTop: $("#towers").offset().top - 70
+                                            }, 1000);
+                                        });
+
+                                        $(".bank-map-icon").click(function() {
+                                            $('html, body').animate({
+                                                scrollTop: $("#bank").offset().top - 70
+                                            }, 1000);
+                                        });
+
+                                        $(".bridge-map-icon").click(function() {
+                                            $('html, body').animate({
+                                                scrollTop: $("#bridge").offset().top - 70
+                                            }, 1000);
+                                        });
+
+                                        $(".castle-map-icon").click(function() {
+                                            $('html, body').animate({
+                                                scrollTop: $("#castle").offset().top - 70
+                                            }, 1000);
+                                        });
+
+                                        $(".museum-map-icon").click(function() {
+                                            $('html, body').animate({
+                                                scrollTop: $("#museum").offset().top - 70
+                                            }, 1000);
+                                        });
+
+                                        $(".church-map-icon").click(function() {
+                                            $('html, body').animate({
+                                                scrollTop: $("#church").offset().top - 70
+                                            }, 1000);
+                                        });
+
+                                        $(".monument-map-icon").click(function() {
+                                            $('html, body').animate({
+                                                scrollTop: $("#monument").offset().top - 70
+                                            }, 1000);
+                                        });
+                                    });
+                                });
+                            </script>
+                        </div>
+                    </div>
+                </div>
+                <div class="towers-section" id="towers">
+                    <div class="title-wrapper flex space-around">
+                        <h2 class="text-center">Zunda torņi</h2>
+                    </div>
+                    <div class="content flex-col">
+                        <div class="images flex content-center gap-1 mt-1" style="flex-wrap: wrap;">
+                            <div class="img-wrapper img-wrapper-sketchy">
+                                <img src="img/photos/towers2.jpg" class="" alt="">
+                            </div>
+                            <div class="img-wrapper img-wrapper-sketchy">
+                                <img src="img/photos/towers1.jpg" alt="">
+                            </div>
+                        </div>
+                        <div class="text mt-1">
+                            Mans ceļojums sākas pie Zundas torņiem, kur vienmēr uz mirkli apstājos, lai apbrīnotu Rīgas vēsturisko mantojumu.
+                        </div>
+                    </div>
+                    <div class="content-desktop display-none">
+                        <div class="content1 mt-3 flex">
+                            <div class="text">
+                                Mans ceļojums sākas pie Zundas torņiem, kur vienmēr uz mirkli apstājos, lai apbrīnotu Rīgas vēsturisko mantojumu.
+                            </div>
+                            <div class="img-wrapper img-wrapper-1 img-wrapper-sketchy">
+                                <img  class="img-tower-1" src="img/photos/towers2.jpg" alt="Zunda towers">
+                            </div>
+                        </div>
+                        <div class="content2 flex">
+                            <div class="img-wrapper img-wrapper-2 img-wrapper-sketchy">
+                                <img class="img-tower-2" src="img/photos/towers1.jpg" alt="Zunda towers to close">
+                            </div>
+                            <div class="text">
+                                Torņu augstums: South 123 m, North 117,5 m. Kopējais apartamentu skaits abos torņos ir 341. North Tower tiks piedāvāti 204 apartamenti no 4. līdz 30. stāvam platībā no 35 līdz 300 kvadrātmetriem. Premium klases iekšējā apdare (ar iebūvētu virtuvi) paredzēta apartamentiem no 4. līdz 18. stāvam.
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="bank-section dark-section" id="bank">
+                    <div class="title-wrapper flex space-around">
+                        <h2 class="text-center">Swedbank birojs</h2>
+                    </div>
+                    <div class="content mt-3 flex-col">
+                        <div class="text">
+                            Tad eju garām Swedbank birojam, mūsdienīgam Rīgas biznesa simbolam. Dzīve šeit rit ik dienas pilnā sparā: biznesa tikšanās, finanšu darījumi, ēkas logos atspoguļojas mūsdienu dzīves ritms.
+                        </div>
+                        <div class="images flex-col items-center">
+                            <div class="img-wrapper img-wrapper-sketchy-white">
+                                <img src="img/photos/bank.jpg" alt="Swedbank Department">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="bridge-section" id="bridge">
+                    <div class="title-wrapper flex space-around">
+                        <h2 class="text-center">Vanšu tilts</h2>
+                    </div>
+                    <div class="content">
+                        <div class="content-wrapper flex space-around">
+                            <div class="images-wrapper content-center flex gap-1 mt-1" style="flex-wrap: wrap;">
+                                <div class="img-wrapper img-wrapper-sketchy">
+                                    <img src="img/photos/bridge1.jpg" alt="">
+                                </div>
+                                <div class="img-wrapper img-wrapper-sketchy">
+                                    <img src="img/photos/bridge4.jpg" alt="">
+                                </div>
+                                <div class="img-wrapper img-wrapper-sketchy">
+                                    <img src="img/photos/bridge3.jpg" alt="">
+                                </div>
+                            </div>
+                            <div class="text-wrapper mt-1">
+                                Mans ceļojums turpinās caur Vanšu tiltu, brīnišķīgu tiltu pār Daugavu. Katru reizi, kad esmu uz tilta, mana sirds pārspēj šī ūdensceļa skaistumu, kas vēsturiski ir bijis pilsētas dzīvības spēks.
+                            </div>
+                        </div>
+                    </div>
+                    <div class="content-desktop display-none">
+                        <div class="bridge-content-wrapper flex-col">
+                            <div class="images-wrapper flex gap-2 content-center">
+                                <div class="img-wrapper img-wrapper-sketchy">
+                                    <img src="img/photos/bridge1.jpg" alt="">
+                                </div>
+                                <div class="img-wrapper img-wrapper-sketchy">
+                                    <img src="img/photos/bridge4.jpg" alt="">
+                                </div>
+                                <div class="img-wrapper img-wrapper-sketchy">
+                                    <img src="img/photos/bridge3.jpg" alt="">
+                                </div>
+                            </div>
+                            <div class="text-wrapper mt-1">
+                                Mans ceļojums turpinās caur Vanšu tiltu, brīnišķīgu tiltu pār Daugavu. Katru reizi, kad esmu uz tilta, mana sirds pārspēj šī ūdensceļa skaistumu, kas vēsturiski ir bijis pilsētas dzīvības spēks.
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="castle-section dark-section" id="castle">
+                    <div class="title-wrapper flex space-around color-white">
+                        <h2 class="text-center">Rīgas pils</h2>
+                    </div>
+                    <div class="content">
+                        <div class="text mt-1">
+                            Tad mans skatiens krīt uz Rīgas pili - pili, kas iedveš godbijību un cieņu. Šī 14. gadsimtā celtā pils ir bijusi daudzu vēsturisku notikumu lieciniece, un tās sienas glabā gadsimtu noslēpumus.
+                        </div>
+                        <div class="image-wrapper mt-1">
+                            <img src="img/castle.png" alt="">
+                        </div>
+                    </div>
+                    <div class="content-desktop display-none mt-3">
+                        <div class="text-wrapper">
+                            Tad mans skatiens krīt uz Rīgas pili - pili, kas iedveš godbijību un cieņu. Šī 14. gadsimtā celtā pils ir bijusi daudzu vēsturisku notikumu lieciniece, un tās sienas glabā gadsimtu noslēpumus.
+                        </div>
+                        <div class="img-wrapper">
+                            <img src="img/castle.png" alt="">
+                        </div>
+                    </div>
+                </div>
+                <div class="museum-section" id="museum">
+                    <div class="title-wrapper flex space-around">
+                        <h2 class="text-center">Latvijas Nacionālais mākslas muzejs</h2>
+                    </div>
+                    <div class="content mt-2">
+                        <div class="slider-wrapper flex content-center">
+                            <div class="slider-container">
+                                <div class="slides fade img-wrapper-sketchy">
+                                    <div class="slider-numbers">1/4</div>
+                                    <div class="slider-image"><img src="img/photos/museum1.jpg" alt="background_1"></div>
+                                </div>
+                                
+                                <div class="slides fade img-wrapper-sketchy">
+                                    <div class="slider-numbers">2/4</div>
+                                    <div class="slider-image"><img src="img/photos/museum2.jpg" alt="background_2"></div>
+                                </div>
+                                
+                                <div class="slides fade img-wrapper-sketchy">
+                                    <div class="slider-numbers">3/4</div>
+                                    <div class="slider-image"><img src="img/photos/museum3.jpg" alt="background_3"></div>
+                                </div>
+                                
+                                <div class="slides fade img-wrapper-sketchy">
+                                    <div class="slider-numbers">4/4</div>
+                                    <div class="slider-image"><img src="img/photos/museum4.jpg" alt="background_4"></div>
+                                </div>
+                                
+                                <a class="prev">&#10094;</a>
+                                <a class="next">&#10095;</a>
+                                
+                                <div class="slider-bullets" id="slider-bullets">
+                                    <span class="dots"></span>
+                                    <span class="dots"></span>
+                                    <span class="dots"></span>
+                                    <span class="dots"></span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="text mt-1">
+                            Tad mans skatiens krīt uz Rīgas pili - pili, kas iedveš godbijību un cieņu. Šī 14. gadsimtā celtā pils ir bijusi daudzu vēsturisku notikumu lieciniece, un tās sienas glabā gadsimtu noslēpumus.
+                        </div>
+                    </div>
+                    <div class="content-desktop display-none mt-3">
+                        <div class="images-wrappper flex">
+                            <div class="img-wrapper side-image">
+                                <img src="img/photos/museum2.jpg" alt="background_1">
+                            </div>
+                            <div class="img-wrapper main-image">
+                                <img src="img/photos/museum1.jpg" alt="background_1">
+                            </div>
+                            <div class="img-wrapper side-image">
+                                <img src="img/photos/museum4.jpg" alt="background_1">
+                            </div>
+                        </div>
+                        <div class="text-wrapper mt-3">
+                            Tad mans skatiens krīt uz Rīgas pili - pili, kas iedveš godbijību un cieņu. Šī 14. gadsimtā celtā pils ir bijusi daudzu vēsturisku notikumu lieciniece, un tās sienas glabā gadsimtu noslēpumus.
+                        </div>
+                    </div>
+                </div>
+                <div class="church-section dark-section" id="church">
+                    <div class="title-wrapper flex space-around color-white">
+                        <h2 class="text-center">Rīgas Kristu Piedzimšanas pareizticīgo katedrāle</h2>
+                    </div>
+                    <div class="content flex-col space-around items-center">
+                        <div class="images-wrapper flex width-full content-center mt-1">
+                            <div class="images-col-1 flex-col">
+                                <div class="image-wrapper img1">
+                                    <img src="img/photos/church4.jpg" alt="">
+                                </div>
+                                <div class="image-wrapper img2">
+                                    <img src="img/photos/church2.jpg" alt="">
+                                </div>
+                            </div>
+                            <div class="images-col-2">
+                                <div class="image-wrapper img3">
+                                    <img src="img/photos/church3.jpg" alt="">
+                                </div>
+                            </div>
+                        </div>
+                        <div class="text-wrapper width-full mt-1">
+                            Tālāk mans ceļš ved uz Rīgas Kristus Piedzimšanas pareizticīgo katedrāli, kur majestātiskā arhitektūra un garīgā atmosfēra atgādina par garīgo pārdomu nozīmi mūsu drudžainajā dzīvē.                        </div>
+                    </div>
+                </div>
+                <div class="monument-section" id="monument">
+                    <div class="title-wrapper flex space-around">
+                        <h2 class="text-center">Brīvības piemineklis</h2>
+                    </div>
+                    <div class="content flex-col mt-3 items-center">
+                        <div class="image-wrapper img-wrapper-sketchy flex space-around">
+                            <img src="img/photos/monument.jpg" alt="">
+                        </div>
+
+                        <div class="text mt-1">
+                            Beidzot mans maršruts beidzas pie Brīvības piemineklis - Brīvības pieminekļa, kas tika uzcelts par godu Latvijas neatkarībai. Šis piemineklis ir mūsu tautas lepnuma un vienotības simbols, un tā klātbūtne mani vienmēr piepilda ar optimismu un spēku.                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    </body>
+</html>
