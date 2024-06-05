@@ -4,11 +4,13 @@ $(document).ready(function() {
     $(".burger-menu").click(function(){
         console.log("open");
         $(".menu-popup").show();
+        $("body").css("overflow", "hidden")
     });
 
     $(".close-menu").click(function(){
         console.log("open");
         $(".menu-popup").hide();
+        $("body").css("overflow", "scroll")
     });
 
     $("#cbx-3").change(function() {
